@@ -5,6 +5,7 @@ require('dotenv').config()
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser")
 const exerciseRoute = require("./routes/exerciseRoute")
+const {home} = require("./controllers/exerciseControllers")
 
 const uri = process.env.MONGO_URI;
 
@@ -23,9 +24,7 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended:"false"}))
 app.use(bodyParser.json())
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/index.html')
-});
+app.get('/', home);
 
 app.use("/api/users", exerciseRoute)
 
